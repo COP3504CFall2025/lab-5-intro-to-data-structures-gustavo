@@ -68,6 +68,7 @@ public:
 		{
 			this->head = new Node<T>(data);
 			this->tail = this->head;
+			this->count++;
 			return;
 		}
 		this->head->prev = new Node<T>(data, this->head);
@@ -80,6 +81,7 @@ public:
 		{
 			this->tail = new Node<T>(data);
 			this->head = this->tail;
+			this->count++;
 			return;
 		}
 		this->tail->next = new Node<T>(data, nullptr, this->tail);
@@ -206,9 +208,9 @@ public:
 		Node<T> *internalIter = this->head;
 		while (internalIter->next)
 		{
-			Node<T> *prev = internalIter;
+			Node<T> *prevNode = internalIter;
 			internalIter = internalIter->next;
-			delete prev;
+			delete prevNode;
 		}
 		delete internalIter;
 	}
