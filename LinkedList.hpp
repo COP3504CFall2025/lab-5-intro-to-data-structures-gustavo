@@ -21,21 +21,24 @@ public:
 		Node<T> *current = this->head;
 		if (!current)
 			return;
+		std::cout << current->data << std::endl;
 		while (current->next)
 		{
 			current = current->next;
-			std::cout << current->data;
+			std::cout << current->data << std::endl;
 		}
 	}
 	void printReverse() const
 	{
-		LinkedList reversedList = LinkedList();
-		Node<T> *iter = this->head;
-		reversedList.addHead(this->head->data);
-		while (iter->next)
+
+		Node<T> *current = this->tail;
+		if (!current)
+			return;
+		std::cout << current->data << std::endl;
+		while (current->prev)
 		{
-			iter = iter->next;
-			reversedList.addHead(iter->data);
+			current = current->prev;
+			std::cout << current->data << std::endl;
 		}
 	}
 
@@ -121,6 +124,7 @@ public:
 		}
 		Node<T> *oldTail = this->tail;
 		this->tail = this->tail->prev;
+		this->tail->next = nullptr;
 		delete oldTail;
 		this->count--;
 		return true;
