@@ -30,11 +30,11 @@ public:
 	{
 		LinkedList reversedList = LinkedList();
 		Node<T> *iter = this->head;
-		reversedList.addHead(this->head);
+		reversedList.addHead(this->head->data);
 		while (iter->next)
 		{
 			iter = iter->next;
-			reversedList.addHead(iter);
+			reversedList.addHead(iter->data);
 		}
 	}
 
@@ -89,7 +89,6 @@ public:
 		if (!this->head->next)
 		{
 			delete this->head;
-			this->head == nullptr;
 			return true;
 		}
 		Node<T> *newHead = this->head->next;
@@ -99,9 +98,19 @@ public:
 	}
 	bool removeTail()
 	{
-		if (!this->tail)
+		Node<T> *iter = this->head;
+		if (!iter)
+		{
+			return false;
+		}
+		while (iter->next)
+		{
+			iter = iter->next;
+		}
+		delete iter;
+		return true;
 	}
-	void Clear()
+	void clear()
 	{
 		Node<T> *current = this->head;
 		while (current->next != nullptr)
@@ -120,21 +129,21 @@ public:
 	{
 
 		this->head = other.getHead();
-		other.getHead() = nullptr;
+		other.head = nullptr;
 		this->tail = other.getTail();
-		other.getTail() = nullptr;
+		other.tail = nullptr;
 		return this;
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
 	{
-		Node<T> *externalIter = list.getHead();
+		Node<T> *externalIter = rhs.getHead();
 		if (!externalIter)
 		{
 			this->head = nullptr;
 			this->tail = nullptr;
-			return;
+			return this;
 		}
-		this->head = new Node<T>(externalIter->data_);
+		this->head = new Node<T>(externalIter->data);
 		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
@@ -142,6 +151,7 @@ public:
 			internalIter = internalIter->next;
 			externalIter = externalIter->next;
 		}
+		return this;
 	}
 
 	// Construction/Destruction
@@ -160,7 +170,7 @@ public:
 			this->tail = nullptr;
 			return;
 		}
-		this->head = new Node<T>(externalIter->data_);
+		this->head = new Node<T>(externalIter->data);
 		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
