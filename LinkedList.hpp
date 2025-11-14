@@ -40,7 +40,10 @@ public:
 	}
 
 	// Accessors
-	[[nodiscard]] unsigned int getCount() const;
+	[[nodiscard]] unsigned int getCount() const
+	{
+		return this->count;
+	}
 	Node<T> *getHead()
 	{
 		return this->head;
@@ -69,6 +72,7 @@ public:
 		}
 		this->head->prev = new Node<T>(data, this->head);
 		this->head = this->head->prev;
+		this->count++;
 	}
 	void addTail(const T &data)
 	{
@@ -80,6 +84,7 @@ public:
 		}
 		this->tail->next = new Node<T>(data, nullptr, this->tail);
 		this->tail = this->tail->next;
+		this->count++;
 	}
 
 	// Removal
@@ -93,22 +98,27 @@ public:
 			return true;
 		}
 		Node<T> *newHead = this->head->next;
+		newHead->prev = nullptr;
 		delete this->head;
 		this->head = newHead;
+		this->count--;
 		return true;
 	}
 	bool removeTail()
 	{
-		Node<T> *iter = this->head;
-		if (!iter)
+		if (!this->tail)
 		{
 			return false;
 		}
-		while (iter->next)
+		if (!this->tail->prev)
 		{
-			iter = iter->next;
+			delete this->tail;
+			return true;
 		}
-		delete iter;
+		Node *oldTail = this->tail;
+		this->tail = this->tail->prev;
+		delete oldTail;
+		this->count--;
 		return true;
 	}
 	void clear()
