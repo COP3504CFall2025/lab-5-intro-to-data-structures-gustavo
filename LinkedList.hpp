@@ -181,10 +181,10 @@ public:
 	}
 	LinkedList(LinkedList<T> &&other) noexcept
 	{
-		this->head = other.getHead();
-		other.getHead() = nullptr;
-		this->tail = other.getTail();
-		other.getTail() = nullptr;
+		this->head = other.head;
+		other.head = nullptr;
+		this->tail = other.tail;
+		other.tail = nullptr;
 	}
 	~LinkedList()
 	{
