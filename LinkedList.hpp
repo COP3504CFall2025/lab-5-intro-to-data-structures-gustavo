@@ -143,6 +143,8 @@ public:
 		}
 		delete current;
 		this->count--;
+		this->head = nullptr;
+		this->tail = nullptr;
 	}
 
 	// Operators
