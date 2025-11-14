@@ -163,7 +163,7 @@ public:
 	}
 	LinkedList(const LinkedList<T> &list)
 	{
-		Node<T> *externalIter = list.getHead();
+		Node<T> *externalIter = list.head;
 		if (!externalIter)
 		{
 			this->head = nullptr;
