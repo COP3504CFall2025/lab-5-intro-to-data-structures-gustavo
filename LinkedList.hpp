@@ -132,6 +132,8 @@ public:
 	void clear()
 	{
 		Node<T> *current = this->head;
+		if (!current)
+			return;
 		while (current->next != nullptr)
 		{
 			Node<T> *next = current->next;
