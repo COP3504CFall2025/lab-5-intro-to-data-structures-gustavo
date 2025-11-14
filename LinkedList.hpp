@@ -132,16 +132,16 @@ public:
 		other.head = nullptr;
 		this->tail = other.getTail();
 		other.tail = nullptr;
-		return this;
+		return *this;
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
 	{
-		Node<T> *externalIter = rhs.getHead();
+		Node<T> *externalIter = rhs.head;
 		if (!externalIter)
 		{
 			this->head = nullptr;
 			this->tail = nullptr;
-			return this;
+			return *this;
 		}
 		this->head = new Node<T>(externalIter->data);
 		Node<T> *internalIter = this->head;
@@ -151,7 +151,7 @@ public:
 			internalIter = internalIter->next;
 			externalIter = externalIter->next;
 		}
-		return this;
+		return *this;
 	}
 
 	// Construction/Destruction
