@@ -97,6 +97,7 @@ public:
 		if (!this->head->next)
 		{
 			delete this->head;
+			this->count--;
 			return true;
 		}
 		Node<T> *newHead = this->head->next;
@@ -115,6 +116,7 @@ public:
 		if (!this->tail->prev)
 		{
 			delete this->tail;
+			this->count--;
 			return true;
 		}
 		Node<T> *oldTail = this->tail;
@@ -130,11 +132,11 @@ public:
 		{
 			Node<T> *next = current->next;
 			delete current;
-			count--;
+			this->count--;
 			current = next;
 		}
 		delete current;
-		count--;
+		this->count--;
 	}
 
 	// Operators
