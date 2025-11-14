@@ -17,7 +17,7 @@ public:
 	// Behaviors
 	void printForward() const
 	{
-		Node *current = this->head;
+		Node<T> *current = this->head;
 		if (!current)
 			return;
 		while (current->next)
@@ -29,7 +29,7 @@ public:
 	void printReverse() const
 	{
 		LinkedList reversedList = LinkedList();
-		Node *iter = this->head;
+		Node<T> *iter = this->head;
 		reversedList.addHead(this->head);
 		while (iter->next)
 		{
@@ -40,19 +40,19 @@ public:
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const;
-	Node *getHead()
+	Node<T> *getHead()
 	{
 		return this->head;
 	}
-	const Node *getHead() const
+	const Node<T> *getHead() const
 	{
 		return this->head;
 	}
-	Node *getTail()
+	Node<T> *getTail()
 	{
 		return this->tail;
 	}
-	const Node *getTail() const
+	const Node<T> *getTail() const
 	{
 		return this->tail;
 	}
@@ -62,22 +62,22 @@ public:
 	{
 		if (!this->head)
 		{
-			this->head = new Node(data);
+			this->head = new Node<T>(data);
 			this->tail = this->head;
 			return;
 		}
-		Node *newHead = new Node(data, this->head);
+		Node<T> *newHead = new Node<T>(data, this->head);
 		this->head = newHead;
 	}
 	void addTail(const T &data)
 	{
 		if (!this->tail)
 		{
-			this->tail = new Node(data);
+			this->tail = new Node<T>(data);
 			this->head = this->tail;
 			return;
 		}
-		this->tail->next = new Node(data);
+		this->tail->next = new Node<T>(data);
 		this->tail = this->tail->next;
 	}
 
@@ -92,10 +92,10 @@ public:
 			this->head == nullptr;
 			return true;
 		}
-		Node *newHead = this->head->next;
+		Node<T> *newHead = this->head->next;
 		delete this->head;
 		this->head = newHead;
-		return true
+		return true;
 	}
 	bool removeTail()
 	{
@@ -103,10 +103,10 @@ public:
 	}
 	void Clear()
 	{
-		Node *current = this->head;
+		Node<T> *current = this->head;
 		while (current->next != nullptr)
 		{
-			Node *next = current->next;
+			Node<T> *next = current->next;
 			delete current;
 			count--;
 			current = next;
@@ -127,18 +127,18 @@ public:
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
 	{
-		Node *externalIter = list.getHead();
+		Node<T> *externalIter = list.getHead();
 		if (!externalIter)
 		{
 			this->head = nullptr;
 			this->tail = nullptr;
 			return;
 		}
-		this->head = new Node(externalIter->data_);
-		Node *internalIter = this->head;
+		this->head = new Node<T>(externalIter->data_);
+		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
-			internalIter->next = new Node(externalIter->data);
+			internalIter->next = new Node<T>(externalIter->data);
 			internalIter = internalIter->next;
 			externalIter = externalIter->next;
 		}
@@ -153,18 +153,18 @@ public:
 	}
 	LinkedList(const LinkedList<T> &list)
 	{
-		Node *externalIter = list.getHead();
+		Node<T> *externalIter = list.getHead();
 		if (!externalIter)
 		{
 			this->head = nullptr;
 			this->tail = nullptr;
 			return;
 		}
-		this->head = new Node(externalIter->data_);
-		Node *internalIter = this->head;
+		this->head = new Node<T>(externalIter->data_);
+		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
-			internalIter->next = new Node(externalIter->data);
+			internalIter->next = new Node<T>(externalIter->data);
 			internalIter = internalIter->next;
 			externalIter = externalIter->next;
 		}
@@ -182,10 +182,10 @@ public:
 		{
 			return;
 		}
-		Node *internalIter = this->head;
+		Node<T> *internalIter = this->head;
 		while (internalIter->next)
 		{
-			Node *prev = internalIter;
+			Node<T> *prev = internalIter;
 			internalIter = internalIter->next;
 			delete prev;
 		}
@@ -194,7 +194,7 @@ public:
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node *head;
-	Node *tail;
+	Node<T> *head;
+	Node<T> *tail;
 	unsigned int count;
 };
