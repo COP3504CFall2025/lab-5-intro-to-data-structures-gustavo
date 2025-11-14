@@ -115,7 +115,7 @@ public:
 			delete this->tail;
 			return true;
 		}
-		Node *oldTail = this->tail;
+		Node<T> *oldTail = this->tail;
 		this->tail = this->tail->prev;
 		delete oldTail;
 		this->count--;
