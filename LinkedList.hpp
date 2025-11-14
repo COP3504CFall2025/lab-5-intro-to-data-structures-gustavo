@@ -8,7 +8,7 @@ struct Node
 	Node *next;
 	Node *prev;
 	T data;
-	Node(T nodeData, Node *nextNode = nullptr, Node *prevNode) : next(nextNode), prev(prevNode), data(nodeData) {};
+	Node(T nodeData, Node *nextNode = nullptr, Node *prevNode = nullptr) : next(nextNode), prev(prevNode), data(nodeData) {};
 };
 
 template <typename T>
