@@ -6,8 +6,9 @@ template <typename T>
 struct Node
 {
 	Node *next;
+	Node *prev;
 	T data;
-	Node(T nodeData, Node *nextNode = nullptr) : next(nextNode), data(nodeData) {};
+	Node(T nodeData, Node *nextNode = nullptr, Node *prevNode) : next(nextNode), prev(prevNode), data(nodeData) {};
 };
 
 template <typename T>
@@ -66,8 +67,8 @@ public:
 			this->tail = this->head;
 			return;
 		}
-		Node<T> *newHead = new Node<T>(data, this->head);
-		this->head = newHead;
+		this->head->prev = new Node<T>(data, this->head);
+		this->head = this->head->prev;
 	}
 	void addTail(const T &data)
 	{
@@ -77,7 +78,7 @@ public:
 			this->head = this->tail;
 			return;
 		}
-		this->tail->next = new Node<T>(data);
+		this->tail->next = new Node<T>(data, nullptr, this->tail);
 		this->tail = this->tail->next;
 	}
 
