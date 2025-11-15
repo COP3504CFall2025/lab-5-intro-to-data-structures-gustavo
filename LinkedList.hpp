@@ -100,6 +100,8 @@ public:
 		if (!this->head->next)
 		{
 			delete this->head;
+			this->head = nullptr;
+			this->tail = nullptr;
 			this->count--;
 			return true;
 		}
@@ -119,6 +121,8 @@ public:
 		if (!this->tail->prev)
 		{
 			delete this->tail;
+			this->tail = nullptr;
+			this->head = nullptr;
 			this->count--;
 			return true;
 		}
@@ -138,42 +142,46 @@ public:
 		{
 			Node<T> *next = current->next;
 			delete current;
-			this->count--;
 			current = next;
 		}
 		delete current;
 		this->count--;
 		this->head = nullptr;
 		this->tail = nullptr;
+		this->count = 0;
 	}
 
 	// Operators
 	LinkedList<T> &operator=(LinkedList<T> &&other) noexcept
 	{
-
+		this->clear();
 		this->head = other.getHead();
 		other.head = nullptr;
 		this->tail = other.getTail();
 		other.tail = nullptr;
+		this->count = other.getCount();
 		return *this;
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
 	{
+		this->clear();
+		this->count = 0;
 		Node<T> *externalIter = rhs.head;
 		if (!externalIter)
 		{
-			this->head = nullptr;
-			this->tail = nullptr;
 			return *this;
 		}
 		this->head = new Node<T>(externalIter->data);
+		this->count++;
 		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
-			internalIter->next = new Node<T>(externalIter->data);
-			internalIter = internalIter->next;
 			externalIter = externalIter->next;
+			internalIter->next = new Node<T>(externalIter->data, nullptr, internalIter);
+			this->count++;
+			internalIter = internalIter->next;
 		}
+		this->tail = internalIter;
 		return *this;
 	}
 
@@ -186,6 +194,7 @@ public:
 	}
 	LinkedList(const LinkedList<T> &list)
 	{
+		this->count = 0;
 		Node<T> *externalIter = list.head;
 		if (!externalIter)
 		{
@@ -194,13 +203,16 @@ public:
 			return;
 		}
 		this->head = new Node<T>(externalIter->data);
+		this->count++;
 		Node<T> *internalIter = this->head;
 		while (externalIter->next)
 		{
-			internalIter->next = new Node<T>(externalIter->data);
-			internalIter = internalIter->next;
 			externalIter = externalIter->next;
+			internalIter->next = new Node<T>(externalIter->data, nullptr, internalIter);
+			this->count++;
+			internalIter = internalIter->next;
 		}
+		this->tail = internalIter;
 	}
 	LinkedList(LinkedList<T> &&other) noexcept
 	{
