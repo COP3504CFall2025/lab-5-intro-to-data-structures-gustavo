@@ -155,11 +155,11 @@ public:
 	LinkedList<T> &operator=(LinkedList<T> &&other) noexcept
 	{
 		this->clear();
-		this->head = other.getHead();
+		this->head = other.head;
 		other.head = nullptr;
-		this->tail = other.getTail();
+		this->tail = other.tail;
 		other.tail = nullptr;
-		this->count = other.getCount();
+		this->count = other.count;
 		return *this;
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
@@ -220,6 +220,7 @@ public:
 		other.head = nullptr;
 		this->tail = other.tail;
 		other.tail = nullptr;
+		this->count = other.count;
 	}
 	~LinkedList()
 	{
