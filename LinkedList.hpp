@@ -160,6 +160,7 @@ public:
 		this->tail = other.tail;
 		other.tail = nullptr;
 		this->count = other.count;
+		other.count = 0;
 		return *this;
 	}
 	LinkedList<T> &operator=(const LinkedList<T> &rhs)
@@ -221,6 +222,7 @@ public:
 		this->tail = other.tail;
 		other.tail = nullptr;
 		this->count = other.count;
+		other.count = 0;
 	}
 	~LinkedList()
 	{
