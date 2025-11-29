@@ -13,7 +13,7 @@ private:
 
 public:
     // Constructor
-    LLQ() : list() {};
+    LLQ() : list() {}
 
     // Insertion
     void enqueue(const T &item) override
