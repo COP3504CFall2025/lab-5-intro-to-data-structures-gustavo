@@ -29,39 +29,35 @@ public:
     // Core Removal Operations
     T popFront() override
     {
-        T *pHead = this->list.getHead();
-        if (!pHead)
+        Node<T> *head = this->list.getHead();
+        if (!head)
             throw std::out_of_range("no head vro");
-        T head = *pHead;
         this->list.removeHead();
-        return head;
+        return head->data;
     }
     T popBack() override
     {
-        T *pTail = this->list.getTail();
-        if (!pTail)
+        Node<T> *tail = this->list.getTail();
+        if (!tail)
             throw std::out_of_range("no tail vro");
-        T tail = *pTail;
         this->list.removeTail();
-        return tail;
+        return tail->data;
     }
 
     // Element Accessors
     const T &front() const override
     {
-        T *pHead = this->list.getHead();
-        if (!pHead)
+        Node<T> *head = this->list.getHead();
+        if (!head)
             throw std::out_of_range("no head vro");
-        T head = *pHead;
-        return head;
+        return head->data;
     }
     const T &back() const override
     {
-        T *pTail = this->list.getTail();
-        if (!pTail)
+        Node<T> *tail = this->list.getTail();
+        if (!tail)
             throw std::out_of_range("no tail vro");
-        T tail = *pTail;
-        return tail;
+        return tail->data;
     }
 
     // Getter

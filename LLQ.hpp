@@ -24,22 +24,20 @@ public:
     // Deletion
     T dequeue() override
     {
-        T *pTail = this->list.getTail();
-        if (!pTail)
+        Node<T> *tail = this->list.getTail();
+        if (!tail)
             throw std::out_of_range("no tail vro");
-        T tail = *pTail;
         this->list.removeTail();
-        return tail;
+        return tail->data;
     }
 
     // Access
     T peek() const override
     {
-        T *pTail = this->list.getTail();
-        if (!pTail)
+        Node<T> *tail = this->list.getTail();
+        if (!tail)
             throw std::out_of_range("no tail vro");
-        T tail = *pTail;
-        return tail;
+        return tail->data;
     }
 
     // Getter

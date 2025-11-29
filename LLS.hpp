@@ -24,22 +24,20 @@ public:
     // Deletion
     T pop() override
     {
-        T *pHead = this->list.getHead();
-        if (!pHead)
+        Node<T> *head = this->list.getHead();
+        if (!head)
             throw std::out_of_range("no head vro");
-        T head = *pHead;
         this->list.removeHead();
-        return head;
+        return head->data;
     }
 
     // Access
     T peek() const override
     {
-        T *pHead = this->list.getHead();
-        if (!pHead)
+        Node<T> *head = this->list.getHead();
+        if (!head)
             throw std::out_of_range("no head vro");
-        T head = *pHead;
-        return head;
+        return head->data;
     }
 
     // Getters
