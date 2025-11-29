@@ -9,7 +9,7 @@ class StackInterface
     virtual void push(const T &item);
     virtual T pop(const T &item);
     virtual T peek() const;
-    virtual std::size_t getSize();
+    virtual std::size_t getSize() const;
 };
 
 template <typename T>
@@ -18,7 +18,7 @@ class QueueInterface
     virtual void enqueue(const T &item);
     virtual T dequeue(const T &item);
     virtual T peek() const;
-    virtual std::size_t getSize();
+    virtual std::size_t getSize() const;
 };
 
 template <typename T>
@@ -30,5 +30,5 @@ class DequeInterface
     virtual T popBack();
     virtual const T &front() const;
     virtual const T &back() const;
-    virtual std::size_t getSize();
+    virtual std::size_t getSize() const;
 };
