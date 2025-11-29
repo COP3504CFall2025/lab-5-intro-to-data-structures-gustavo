@@ -34,7 +34,7 @@ public:
     // Access
     T peek() const override
     {
-        Node<T> *head = this->list.getHead();
+        const Node<T> *head = this->list.getHead();
         if (!head)
             throw std::out_of_range("no head vro");
         return head->data;

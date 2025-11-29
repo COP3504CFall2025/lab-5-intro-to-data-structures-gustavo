@@ -47,14 +47,14 @@ public:
     // Element Accessors
     const T &front() const override
     {
-        Node<T> *head = this->list.getHead();
+        const Node<T> *head = this->list.getHead();
         if (!head)
             throw std::out_of_range("no head vro");
         return head->data;
     }
     const T &back() const override
     {
-        Node<T> *tail = this->list.getTail();
+        const Node<T> *tail = this->list.getTail();
         if (!tail)
             throw std::out_of_range("no tail vro");
         return tail->data;

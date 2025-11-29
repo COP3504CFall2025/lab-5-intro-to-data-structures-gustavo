@@ -34,7 +34,7 @@ public:
     // Access
     T peek() const override
     {
-        Node<T> *tail = this->list.getTail();
+        const Node<T> *tail = this->list.getTail();
         if (!tail)
             throw std::out_of_range("no tail vro");
         return tail->data;
