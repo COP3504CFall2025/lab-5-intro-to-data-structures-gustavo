@@ -14,7 +14,7 @@ private:
 public:
     // Constructor
     LLQ() : list() {}
-    ~LLQ() = default;
+    ~LLQ() override = default;
 
     // Insertion
     void enqueue(const T &item) override
