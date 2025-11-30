@@ -63,9 +63,9 @@ public:
     ABQ &operator=(const ABQ &rhs)
     {
         T *newArray = new T[rhs.capacity_];
-        for (size_t i = 0; i < other.curr_size_; i++)
+        for (size_t i = 0; i < rhs.curr_size_; i++)
         {
-            newArray[i] = other.array_[i];
+            newArray[i] = rhs.array_[i];
         }
 
         delete[] this->array;
