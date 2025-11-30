@@ -8,9 +8,9 @@ class StackInterface
 {
 public:
     virtual void push(const T &item) = 0;
-    virtual T pop();
-    virtual T peek() const;
-    virtual std::size_t getSize() const;
+    virtual T pop() = 0;
+    virtual T peek() const = 0;
+    virtual std::size_t getSize() const = 0;
     virtual ~StackInterface() noexcept {};
 };
 
@@ -30,11 +30,11 @@ class DequeInterface
 {
 public:
     virtual void pushFront(const T &item) = 0;
-    virtual void pushBack(const T &item);
-    virtual T popFront();
-    virtual T popBack();
-    virtual const T &front() const;
-    virtual const T &back() const;
-    virtual std::size_t getSize() const;
+    virtual void pushBack(const T &item) = 0;
+    virtual T popFront() = 0;
+    virtual T popBack(= 0);
+    virtual const T &front() const = 0;
+    virtual const T &back() const = 0;
+    virtual std::size_t getSize() const = 0;
     virtual ~DequeInterface() noexcept {};
 };
