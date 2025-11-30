@@ -156,7 +156,7 @@ public:
     // Access
     T peek() const override
     {
-        if (this->curr_size_ <= 0)
+        if (this->curr_size_ == 0)
             throw std::runtime_error("Gerb");
         return this->array_[this->curr_size_ - 1];
     }
@@ -164,11 +164,12 @@ public:
     // Deletion
     T dequeue() override
     {
-        if (this->curr_size_ <= this->capacity_ / scale_factor_ && this->capacity_ > 1)
-            reserve(capacity_ / scale_factor_);
         if (this->curr_size_ == 0)
             throw std::runtime_error("Gerb");
+        T last = this->array_[curr_size_ - 1];
+        if (this->curr_size_ <= this->capacity_ / scale_factor_ && this->capacity_ > 1)
+            reserve(capacity_ / scale_factor_);
         this->curr_size_--;
-        return this->array_[this->curr_size_];
+        return last;
     };
 };
