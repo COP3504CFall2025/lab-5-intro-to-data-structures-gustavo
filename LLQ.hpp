@@ -13,6 +13,12 @@ private:
 
 public:
     // Constructor
+
+    LLQ(LLQ<T> &&other)
+    {
+        this->list = other.list;
+        other.list = LinkedList<T>();
+    }
     LLQ() : list() {}
     ~LLQ() noexcept override = default;
 
@@ -27,7 +33,7 @@ public:
     {
         Node<T> *tail = this->list.getTail();
         if (!tail)
-            throw std::out_of_range("no tail vro");
+            throw std::runtime_error("Gerb");
         T data = tail->data;
         this->list.removeTail();
         return data;
@@ -38,7 +44,7 @@ public:
     {
         const Node<T> *tail = this->list.getTail();
         if (!tail)
-            throw std::out_of_range("no tail vro");
+            throw std::runtime_error("gerb");
         return tail->data;
     }
 
