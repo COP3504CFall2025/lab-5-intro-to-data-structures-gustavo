@@ -156,7 +156,8 @@ public:
     // Access
     T peek() const override
     {
-        return this->array_[this->curr_size_ - 1];
+        if (this->curr_size_ <= 0)
+            throw std::runtime_error("Gerb") return this->array_[this->curr_size_ - 1];
     }
 
     // Deletion
