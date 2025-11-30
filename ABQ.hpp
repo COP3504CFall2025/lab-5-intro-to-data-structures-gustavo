@@ -27,7 +27,7 @@ class ABQ : public QueueInterface<T>
 
         delete[] this->array_;
         this->array_ = newArray;
-        this->curr_size_ = newSize
+        this->curr_size_ = newSize;
     }
 
 public:
@@ -62,7 +62,7 @@ public:
     }
     ABQ &operator=(const ABQ &rhs)
     {
-        T *newArray = new T[other.capacity_];
+        T *newArray = new T[rhs.capacity_];
         for (size_t i = 0; i < other.curr_size_; i++)
         {
             newArray[i] = other.array_[i];
@@ -71,8 +71,8 @@ public:
         delete[] this->array;
 
         this->array_ = newArray;
-        this->capacity_ = other.capacity_;
-        this->curr_size_ = other.curr_size_;
+        this->capacity_ = rhs.capacity_;
+        this->curr_size_ = rhs.curr_size_;
 
         return *this;
     }
@@ -89,13 +89,13 @@ public:
     ABQ &operator=(ABQ &&rhs) noexcept
     {
         delete[] this->array_;
-        this->array_ = other.array_;
-        this->capacity_ = other.capacity_;
-        this->curr_size_ = other.curr_size_;
+        this->array_ = rhs.array_;
+        this->capacity_ = rhs.capacity_;
+        this->curr_size_ = rhs.curr_size_;
 
-        other.array_ = nullptr;
-        other.capacity_ = 0;
-        other.curr_size_ = 0;
+        rhs.array_ = nullptr;
+        rhs.capacity_ = 0;
+        rhs.curr_size_ = 0;
 
         return *this;
     }
@@ -137,7 +137,7 @@ public:
 
             delete[] this->array_;
             this->array_ = newArray;
-            this->curr_size_ = newSize
+            this->curr_size_ = newSize;
             // note that array_[0] is junk value
         }
         else // enough space. shift all to the right in current array
@@ -148,7 +148,7 @@ public:
                 this->array_[i] = this->array_[i - 1];
             }
         }
-        this->array[0] = data;
+        this->array_[0] = data;
     }
     // Access
     T peek() const override
@@ -162,5 +162,6 @@ public:
         if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 8)
             reserve(curr_size_ / scale_factor_);
         this->curr_size_--;
+        return this->array_[this->curr_size_];
     };
 };
