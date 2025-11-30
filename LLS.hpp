@@ -14,6 +14,7 @@ private:
 public:
     // Constructor
     LLS() : list() {}
+    ~LLS() = default;
 
     // Insertion
     void push(const T &item) override
