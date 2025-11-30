@@ -34,8 +34,8 @@ public:
     // Constructors + Big 5
     ABQ()
     {
-        this->array_ = new T[8];
-        this->capacity_ = 8;
+        this->array_ = new T[1];
+        this->capacity_ = 1;
         this->curr_size_ = 0;
     }
     explicit ABQ(const size_t capacity)
@@ -101,7 +101,7 @@ public:
     }
     ~ABQ() noexcept override
     {
-        delete this->array_;
+        delete[] this->array_;
         this->array_ = nullptr;
         this->capacity_ = 0;
         this->curr_size_ = 0;
@@ -159,7 +159,7 @@ public:
     // Deletion
     T dequeue() override
     {
-        if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 8)
+        if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 1)
             reserve(curr_size_ / scale_factor_);
         this->curr_size_--;
         return this->array_[this->curr_size_];
