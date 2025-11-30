@@ -164,7 +164,7 @@ public:
     // Deletion
     T dequeue() override
     {
-        if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 1)
+        if (this->curr_size_ <= this->capacity_ / scale_factor_ && this->capacity_ > 1)
             reserve(capacity_ / scale_factor_);
         if (this->curr_size_ == 0)
             throw std::runtime_error("Gerb");
