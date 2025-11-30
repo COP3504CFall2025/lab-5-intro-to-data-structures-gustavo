@@ -33,16 +33,18 @@ public:
         Node<T> *head = this->list.getHead();
         if (!head)
             throw std::out_of_range("no head vro");
+        T data = head->data;
         this->list.removeHead();
-        return head->data;
+        return data;
     }
     T popBack() override
     {
         Node<T> *tail = this->list.getTail();
         if (!tail)
             throw std::out_of_range("no tail vro");
+        T data = tail->data;
         this->list.removeTail();
-        return tail->data;
+        return data;
     }
 
     // Element Accessors

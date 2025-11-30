@@ -28,8 +28,9 @@ public:
         Node<T> *head = this->list.getHead();
         if (!head)
             throw std::out_of_range("no head vro");
+        T data = head->data;
         this->list.removeHead();
-        return head->data;
+        return data;
     }
 
     // Access
