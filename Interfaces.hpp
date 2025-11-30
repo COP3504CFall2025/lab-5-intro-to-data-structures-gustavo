@@ -19,9 +19,9 @@ class QueueInterface
 {
 public:
     virtual void enqueue(const T &item) = 0;
-    virtual T dequeue();
-    virtual T peek() const;
-    virtual std::size_t getSize() const;
+    virtual T dequeue() = 0;
+    virtual T peek() const = 0;
+    virtual std::size_t getSize() const = 0;
     virtual ~QueueInterface() noexcept {};
 };
 
