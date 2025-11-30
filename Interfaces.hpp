@@ -7,34 +7,34 @@ template <typename T>
 class StackInterface
 {
 public:
-    virtual void push(const T &item);
+    virtual void push(const T &item) = 0;
     virtual T pop();
     virtual T peek() const;
     virtual std::size_t getSize() const;
-    virtual ~StackInterface() noexcept;
+    virtual ~StackInterface() noexcept {};
 };
 
 template <typename T>
 class QueueInterface
 {
 public:
-    virtual void enqueue(const T &item);
+    virtual void enqueue(const T &item) = 0;
     virtual T dequeue();
     virtual T peek() const;
     virtual std::size_t getSize() const;
-    virtual ~QueueInterface() noexcept;
+    virtual ~QueueInterface() noexcept {};
 };
 
 template <typename T>
 class DequeInterface
 {
 public:
-    virtual void pushFront(const T &item);
+    virtual void pushFront(const T &item) = 0;
     virtual void pushBack(const T &item);
     virtual T popFront();
     virtual T popBack();
     virtual const T &front() const;
     virtual const T &back() const;
     virtual std::size_t getSize() const;
-    virtual ~DequeInterface() noexcept;
+    virtual ~DequeInterface() noexcept {};
 };
