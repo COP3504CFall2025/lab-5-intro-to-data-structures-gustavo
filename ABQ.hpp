@@ -165,10 +165,10 @@ public:
     T dequeue() override
     {
         if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 1)
-            reserve(curr_size_ / scale_factor_);
+            reserve(capacity_ / scale_factor_);
         if (this->curr_size_ == 0)
             throw std::runtime_error("Gerb");
         this->curr_size_--;
-        return this->array_[this->curr_size_ - 1];
+        return this->array_[this->curr_size_];
     };
 };
