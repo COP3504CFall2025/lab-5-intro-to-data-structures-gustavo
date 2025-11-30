@@ -22,6 +22,13 @@ public:
     LLQ() : list() {}
     ~LLQ() noexcept override = default;
 
+    LLQ<T> &operator=(LLQ<T> &&rhs)
+    {
+        this->list = rhs.list;
+        rhs.list = LinkedList<T>();
+        return *this;
+    }
+
     // Insertion
     void enqueue(const T &item) override
     {

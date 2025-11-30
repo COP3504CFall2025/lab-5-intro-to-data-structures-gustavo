@@ -28,6 +28,7 @@ class ABQ : public QueueInterface<T>
         delete[] this->array_;
         this->array_ = newArray;
         this->curr_size_ = newSize;
+        this->capacity_ = newCapacity;
     }
 
 public:
@@ -48,7 +49,7 @@ public:
     {
         this->array_ = nullptr;
         this->capacity_ = 0;
-        this->curr_size = 0;
+        this->curr_size_ = 0;
 
         T *newArray = new T[other.capacity_];
         for (size_t i = 0; i < other.curr_size_; i++)
@@ -68,7 +69,7 @@ public:
             newArray[i] = rhs.array_[i];
         }
 
-        delete[] this->array;
+        delete[] this->array_;
 
         this->array_ = newArray;
         this->capacity_ = rhs.capacity_;
@@ -138,6 +139,7 @@ public:
             delete[] this->array_;
             this->array_ = newArray;
             this->curr_size_ = newSize;
+            this->capacity_ = newCapacity;
             // note that array_[0] is junk value
         }
         else // enough space. shift all to the right in current array
@@ -147,20 +149,23 @@ public:
             {
                 this->array_[i] = this->array_[i - 1];
             }
+            this->curr_size_ = newSize;
         }
         this->array_[0] = data;
     }
     // Access
     T peek() const override
     {
-        return this->array_[this->curr_size_];
+        return this->array_[this->curr_size_ - 1];
     }
 
     // Deletion
     T dequeue() override
     {
-        if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 1)
-            reserve(curr_size_ / scale_factor_);
+        // if (this->curr_size_ < this->capacity_ / 2 && this->capacity_ > 1)
+        //     reserve(curr_size_ / scale_factor_);
+        if (this->curr_size_ == 0)
+            throw std::runtime_error("Gerb");
         this->curr_size_--;
         return this->array_[this->curr_size_];
     };
