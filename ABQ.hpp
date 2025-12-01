@@ -125,7 +125,7 @@ public:
     // Insertion
     void enqueue(const T &data) override
     {
-        if (this->curr_size_ >= this->capacity_) // not enough space. Create a new array with each item shifted to the right
+        if (this->curr_size_ == this->capacity_) // not enough space. Create a new array with each item shifted to the right
         {
             size_t newCapacity = this->capacity_ * scale_factor_;
 
@@ -145,7 +145,7 @@ public:
         else // enough space. shift all to the right in current array
         {
             size_t newSize = this->curr_size_ + 1;
-            for (size_t i = 1; i < newSize; i++)
+            for (size_t i = this->curr_size_; i > 0; i--)
             {
                 this->array_[i] = this->array_[i - 1];
             }
@@ -167,7 +167,7 @@ public:
         if (this->curr_size_ == 0)
             throw std::runtime_error("Gerb");
         T last = this->array_[curr_size_ - 1];
-        if (this->curr_size_ <= this->capacity_ / scale_factor_ && this->capacity_ > 1)
+        if (this->curr_size_ == this->capacity_ / scale_factor_ && this->capacity_ > 1)
             reserve(capacity_ / scale_factor_);
         this->curr_size_--;
         return last;
