@@ -28,7 +28,7 @@ public:
     {
         this->array_ = nullptr;
         this->capacity_ = 0;
-        this->curr_size = 0;
+        this->curr_size_ = 0;
 
         T *newArray = new T[other.capacity_];
         for (size_t i = 0; i < other.curr_size_; i++)
@@ -48,7 +48,7 @@ public:
             newArray[i] = rhs.array_[i];
         }
 
-        delete[] this->array;
+        delete[] this->array_;
 
         this->array_ = newArray;
         this->capacity_ = rhs.capacity_;
@@ -113,6 +113,7 @@ public:
             reserve(capacity_ * scale_factor_);
         }
         this->array_[curr_size_] = data;
+        this->curr_size_++;
     };
 
     T peek() const override
@@ -127,7 +128,7 @@ public:
         if (curr_size_ == 0)
             throw std::runtime_error("Gerb");
         this->curr_size_--;
-        return this->array_[curr_size_ - 1];
+        return this->array_[curr_size_];
     };
 
 private:
@@ -148,6 +149,6 @@ private:
         delete[] this->array_;
         this->array_ = newArray;
         this->curr_size_ = newSize;
-        this->capacity = newCapacity;
+        this->capacity_ = newCapacity;
     }
 };
