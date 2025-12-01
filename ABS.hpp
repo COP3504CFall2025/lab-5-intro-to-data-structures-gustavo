@@ -127,8 +127,12 @@ public:
     {
         if (curr_size_ == 0)
             throw std::runtime_error("Gerb");
+        T last = this->array_[curr_size_ - 1];
+        if (this->curr_size_ == this->capacity_ / scale_factor_ && this->capacity_ > 1)
+            reserve(capacity_ / scale_factor_);
+
         this->curr_size_--;
-        return this->array_[curr_size_];
+        return last;
     };
 
 private:
