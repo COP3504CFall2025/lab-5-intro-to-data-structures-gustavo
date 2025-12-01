@@ -14,8 +14,20 @@ private:
 
 public:
     // Constructor
-    LLDQ();
+    LLDQ() : list() {}
     ~LLDQ() = default;
+
+    LLDQ(LLDQ<T> &&other)
+    {
+        this->list = other.list;
+        other.list = LinkedList<T>();
+    }
+    LLDQ<T> &operator=(LLDQ<T> &&rhs)
+    {
+        this->list = rhs.list;
+        rhs.list = LinkedList<T>();
+        return *this;
+    }
 
     // Core Insertion Operations
     void pushFront(const T &item) override
