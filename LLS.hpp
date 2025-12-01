@@ -16,6 +16,20 @@ public:
     LLS() : list() {}
     ~LLS() = default;
 
+    LLS(LLS<T> &&other)
+    {
+        this->list = other.list;
+        other.list = LinkedList<T>();
+    }
+    LLS<T> &operator=(LLS<T> &&rhs)
+    {
+        if (rhs == *this)
+            return *this;
+        this->list = rhs.list;
+        rhs.list = LinkedList<T>();
+        return *this;
+    }
+
     // Insertion
     void push(const T &item) override
     {

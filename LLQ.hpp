@@ -24,6 +24,8 @@ public:
 
     LLQ<T> &operator=(LLQ<T> &&rhs)
     {
+        if (rhs == *this)
+            return *this;
         this->list = rhs.list;
         rhs.list = LinkedList<T>();
         return *this;
@@ -51,7 +53,7 @@ public:
     {
         const Node<T> *tail = this->list.getTail();
         if (!tail)
-            throw std::runtime_error("gerb");
+            throw std::runtime_error("Gerb");
         return tail->data;
     }
 
