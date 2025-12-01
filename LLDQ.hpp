@@ -17,15 +17,19 @@ public:
     LLDQ() : list() {}
     ~LLDQ() = default;
 
+    LLDQ(const LLDQ<T> &other) : list(std::move(other.list)) {}
     LLDQ(LLDQ<T> &&other)
     {
         this->list = other.list;
         other.list = LinkedList<T>();
     }
+    LLDQ<T> &operator=(const LLDQ<T> &other)
+    {
+        this->list = other;
+    }
     LLDQ<T> &operator=(LLDQ<T> &&rhs)
     {
-        this->list = rhs.list;
-        rhs.list = LinkedList<T>();
+        this->list = std::move(rhs.list);
         return *this;
     }
 

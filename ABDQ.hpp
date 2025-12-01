@@ -61,7 +61,7 @@ public:
         T *newArray = new T[other.capacity_];
         for (size_t i = 0; i < other.size_; i++)
         {
-            newArray[i] = other.array_[(other.front_ + i) % other.capacity_];
+            newArray[i] = other.data_[(other.front_ + i) % other.capacity_];
         }
 
         this->data_ = newArray;
