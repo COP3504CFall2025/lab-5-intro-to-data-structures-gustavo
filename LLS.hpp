@@ -23,8 +23,6 @@ public:
     }
     LLS<T> &operator=(LLS<T> &&rhs)
     {
-        if (rhs == *this)
-            return *this;
         this->list = rhs.list;
         rhs.list = LinkedList<T>();
         return *this;
