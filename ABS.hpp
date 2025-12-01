@@ -81,7 +81,7 @@ public:
     }
     ~ABS() noexcept override
     {
-        delete this->array_;
+        delete[] this->array_;
         this->array_ = nullptr;
         this->capacity_ = 0;
         this->curr_size_ = 0;
