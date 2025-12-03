@@ -83,6 +83,10 @@ public:
     }
     ABDQ &operator=(const ABDQ &other)
     {
+        if (this == &other)
+        {
+            return *this;
+        }
         T *newArray = new T[other.capacity_];
         for (size_t i = 0; i < other.size_; i++)
         {
@@ -101,6 +105,10 @@ public:
     }
     ABDQ &operator=(ABDQ &&other) noexcept
     {
+        if (this == &other)
+        {
+            return *this;
+        }
         delete[] this->data_;
         this->data_ = other.data_;
         this->front_ = other.front_;
