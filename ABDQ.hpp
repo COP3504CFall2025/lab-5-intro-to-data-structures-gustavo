@@ -19,10 +19,6 @@ private:
 
     void reserve(size_t newCapacity)
     {
-        if (newCapacity < 4)
-        {
-            throw std::runtime_error("New capacity too low");
-        }
         T *newArray = new T[newCapacity];
         if (this->size_ > newCapacity)
             throw std::runtime_error("New capacity cannot store all items. You would clip the stuff cuh");
