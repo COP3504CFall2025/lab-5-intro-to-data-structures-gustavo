@@ -25,7 +25,8 @@ public:
     }
     LLDQ<T> &operator=(const LLDQ<T> &other)
     {
-        this->list = other;
+        this->list = other.list;
+        return *this;
     }
     LLDQ<T> &operator=(LLDQ<T> &&rhs)
     {
