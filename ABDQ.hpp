@@ -47,12 +47,8 @@ public:
     }
     explicit ABDQ(std::size_t capacity)
     {
-        if (capacity < 4)
-        {
-            throw std::runtime_error("Capacity too small");
-        }
         this->data_ = new T[capacity];
-        this->capacity_ = capacity;
+        this->capacity_ = capacity >= 4 ? capacity : 4;
         this->size_ = 0;
         this->front_ = this->back_ = -1;
     }
