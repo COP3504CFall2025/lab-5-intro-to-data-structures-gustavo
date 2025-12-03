@@ -19,6 +19,10 @@ private:
 
     void reserve(size_t newCapacity)
     {
+        if (newCapacity < 4)
+        {
+            throw std::runtime_error("New capacity too low");
+        }
         T *newArray = new T[newCapacity];
         if (this->size_ > newCapacity)
             throw std::runtime_error("New capacity cannot store all items. You would clip the stuff cuh");
@@ -47,6 +51,10 @@ public:
     }
     explicit ABDQ(std::size_t capacity)
     {
+        if (capacity < 4)
+        {
+            throw std::runtime_error("Capacity too small");
+        }
         this->data_ = new T[capacity];
         this->capacity_ = capacity;
         this->size_ = 0;
@@ -131,6 +139,13 @@ public:
         {
             reserve(this->capacity_ * SCALE_FACTOR);
         }
+        if (this->front_ == -1)
+        {
+            this->front_++;
+            this->back_++;
+            this->data_[front_] = item;
+            return;
+        }
         std::size_t index = (this->front_ == 0 ? this->capacity_ - 1 : this->front_ - 1);
         this->data_[index] = item;
         this->front_ = index;
@@ -141,6 +156,10 @@ public:
         if (this->size_ == this->capacity_)
         {
             reserve(this->capacity_ * SCALE_FACTOR);
+        }
+        if (this->front_ == -1)
+        {
+            this->front_++;
         }
         std::size_t index = (this->back_ + 1) % this->capacity_;
         this->data_[index] = item;
@@ -164,7 +183,7 @@ public:
         }
 
         this->front_ = (this->front_ + 1) % this->capacity_;
-        if (this->size_ == this->capacity_ / 2)
+        if (this->size_ == this->capacity_ / SCALE_FACTOR)
         {
             reserve(this->capacity_ / SCALE_FACTOR);
         }
@@ -175,7 +194,7 @@ public:
     {
         if (this->front_ == -1)
         {
-            throw std::runtime_error("Cannot call popBack()L Deque is empty");
+            throw std::runtime_error("Cannot call popBack(): Deque is empty");
         }
         T item = this->data_[this->back_];
         this->size_--;
@@ -184,7 +203,7 @@ public:
             this->back_ = this->front_ = -1;
         }
         this->back_ = this->back_ == 0 ? this->capacity_ : this->back_ - 1;
-        if (this->size_ == this->capacity_)
+        if (this->size_ == this->capacity_ / SCALE_FACTOR)
         {
             reserve(this->capacity_ / SCALE_FACTOR);
         }
