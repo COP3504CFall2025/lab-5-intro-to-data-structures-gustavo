@@ -197,7 +197,9 @@ public:
         if (this->back_ == this->front_)
         {
             this->back_ = this->front_ = -1;
+            return item;
         }
+
         this->back_ = this->back_ == 0 ? this->capacity_ : this->back_ - 1;
         if (this->size_ == this->capacity_ / SCALE_FACTOR)
         {
@@ -209,10 +211,14 @@ public:
     // Access
     const T &front() const override
     {
+        if (this->size_ == 0)
+            throw std::runtime_error("Cannot call front(): Deque is empty");
         return this->data_[this->front_];
     }
     const T &back() const override
     {
+        if (this->size_ == 0)
+            throw std::runtime_error("Cannot call back(): Deque is empty");
         return this->data_[this->back_];
     }
 
