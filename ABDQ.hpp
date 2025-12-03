@@ -67,7 +67,8 @@ public:
         this->data_ = newArray;
         this->capacity_ = other.capacity_;
         this->size_ = other.size_;
-        this->front_ = this->back_ = -1;
+        this->front_ = 0;
+        this->back_ = this->size_ - 1;
     }
     ABDQ(ABDQ &&other) noexcept
     {
