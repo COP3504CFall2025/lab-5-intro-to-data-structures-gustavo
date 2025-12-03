@@ -67,6 +67,7 @@ public:
         this->data_ = newArray;
         this->capacity_ = other.capacity_;
         this->size_ = other.size_;
+        this->front_ = this->back_ = -1;
     }
     ABDQ(ABDQ &&other) noexcept
     {
@@ -139,6 +140,7 @@ public:
         {
             reserve(this->capacity_ * SCALE_FACTOR);
         }
+        this->size_++;
         if (this->front_ == -1)
         {
             this->front_++;
@@ -149,7 +151,6 @@ public:
         std::size_t index = (this->front_ == 0 ? this->capacity_ - 1 : this->front_ - 1);
         this->data_[index] = item;
         this->front_ = index;
-        this->size_++;
     }
     void pushBack(const T &item) override
     {
