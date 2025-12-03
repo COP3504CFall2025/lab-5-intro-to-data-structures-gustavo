@@ -47,7 +47,7 @@ public:
     }
     explicit ABDQ(std::size_t capacity)
     {
-        this->data_ = new T[capacity];
+        this->data_ = new T[capacity >= 4 ? capacity : 4];
         this->capacity_ = capacity >= 4 ? capacity : 4;
         this->size_ = 0;
         this->front_ = this->back_ = -1;
